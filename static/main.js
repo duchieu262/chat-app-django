@@ -1,35 +1,39 @@
-
-
-$(".messages").animate({ scrollTop: $(document).height() }, "fast");
-
-$("#profile-img").click(function() {
-	$("#status-options").toggleClass("active");
+$("#join").click(function(){
+  $("#join-form").toggle(300);
 });
+
+
+
 
 $(".expand-button").click(function() {
   $("#profile").toggleClass("expanded");
 	$("#contacts").toggleClass("expanded");
 });
 
-$("#status-options ul li").click(function() {
-	$("#profile-img").removeClass();
-	$("#status-online").removeClass("active");
-	$("#status-away").removeClass("active");
-	$("#status-busy").removeClass("active");
-	$("#status-offline").removeClass("active");
-	$(this).addClass("active");
-	
-	if($("#status-online").hasClass("active")) {
-		$("#profile-img").addClass("online");
-	} else if ($("#status-away").hasClass("active")) {
-		$("#profile-img").addClass("away");
-	} else if ($("#status-busy").hasClass("active")) {
-		$("#profile-img").addClass("busy");
-	} else if ($("#status-offline").hasClass("active")) {
-		$("#profile-img").addClass("offline");
-	} else {
-		$("#profile-img").removeClass();
-	};
-	
-	$("#status-options").removeClass("active");
+$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+$(document).ready(function(){
+
+  $("#search-input").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#user-list li").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
+  $("#search-room").on("keyup", function() {
+    console.log("search")
+    var value = $(this).val().toLowerCase();
+    $("#list-room a").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
 });
+
+function confirmSubmit()
+{
+  var agree=confirm("Are you sure you want to leave this room?");
+  if (agree)
+    return true ;
+  else
+    return false ;
+}

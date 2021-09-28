@@ -2,15 +2,17 @@ import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from django.contrib.auth import get_user_model
-from .models import Message
-
+from .models import Contact, Message, Chat
+from django.shortcuts import get_object_or_404
 
 User = get_user_model()
 
 class ChatConsumer(WebsocketConsumer):
     
     def fetch_messages(self, data):
-        messages = Message.last_10_messages()
+        chatId = data['chatId']
+        current_chat = get_object_or_404(Chat, pk=chatId)
+        messages = Chat.last_10_messages(current_chat)
         content = {
             'command': 'messages',
             'messages': self.messages_to_json(messages)
@@ -18,13 +20,18 @@ class ChatConsumer(WebsocketConsumer):
         self.send_message(content)
 
     def new_message(self, data):
-        author = data['from']
-        author_user = User.objects.filter(username=author)[0]
-        message = Message.objects.create(author=author_user, content=data['message'])
+        contact = data['from']
+        user = User.objects.filter(username=contact)[0]
+        user_contact = Contact.objects.get(user=user)
+        message = Message.objects.create(contact=user_contact, content=data['message'])
+        chatId = data['chatId']
+        current_chat = get_object_or_404(Chat, pk=chatId)
+        current_chat.messages.add(message)
         content = {
             'command': 'new_message',
             'message': self.message_to_json(message)
         }
+        
         return self.send_chat_message(content)
 
     def messages_to_json(self, messages):
@@ -36,7 +43,9 @@ class ChatConsumer(WebsocketConsumer):
     def message_to_json(self, message):
         return {
             'id' : message.id,
-            'author': message.author.username,
+            'contact': message.contact.user.username,
+            'contactName': message.contact.name,
+            'contactImg': message.contact.profile_pic.url,
             'content': message.content,
             'timestamp': str(message.timestamp)
         }
@@ -65,9 +74,7 @@ class ChatConsumer(WebsocketConsumer):
     # Receive message from WebSocket
     def receive(self, text_data):
         data = json.loads(text_data)
-        print('DATA............................', data)
         self.commands[data['command']](self, data)
-
 
     def send_chat_message(self, message):
 

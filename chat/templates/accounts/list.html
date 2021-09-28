@@ -1,0 +1,331 @@
+{% load static %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<!DOCTYPE html><html class=''>
+<head>
+	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script>
+	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script>
+	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script>
+	<meta charset='UTF-8'>
+	<meta name="robots" content="noindex">
+	<link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+	<link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+
+<script type="text/html" src="https://use.typekit.net/hoy3lrg.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link rel='stylesheet' href="{% static 'style.css'%}">
+
+</head>
+
+	
+<style>
+	body {
+font-family: 'Ropa Sans', sans-serif;
+}
+.list-group-item{
+padding: 5px 20px;
+}
+.list-group-item:hover{
+background: #f1f1f1;
+}
+.user-img img{
+height: 70px;
+width: 70px;
+}
+.card {
+    height:75%;
+    overflow:scroll; 
+    overflow-x: hidden;
+}
+.card-header h4{
+display: inline-block;
+padding: 12px 15px 8px 15px;
+}
+.card-header ul{
+list-style: none;
+}
+.card-header ul li a{
+font-size: 25px;
+padding: 15px 10px 9px;
+outline: none;
+}
+.search-div{
+display: none;
+}
+.user-detail{
+font-size: 14px;
+}
+.scrolling-wrapper{
+	overflow-x: auto;
+    width: 63%;
+    height: 100
+}
+
+.subtitle{
+	font-size: 1.25em;
+	opacity: 0.65;
+}
+
+.card-block{
+	height: 250px;
+	background-color: #fff;
+	border: none;
+	background-position: center;
+	background-size: cover;
+	transition: all 0.2s ease-in-out !important;
+	border-radius: 24px;
+	&:hover{
+		transform: translateY(-5px);
+		box-shadow: none;
+	}
+}
+
+.card-1{
+	background-color: #4158D0;
+background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+
+.card-2{
+	background-color: #0093E9;
+background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.card-3{
+	background-color: #00DBDE;
+background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+}
+
+.card-4{
+	background-color: #FBAB7E;
+background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+}
+
+.card-5{
+	background-color: #85FFBD;
+background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+}
+
+.card-6{
+	background-color: #FA8BFF;
+background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
+}
+
+.card-7{
+	background-color: #FA8BFF;
+background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BFF88 90%);
+}
+
+.card-8{
+	background-color: #FBDA61;
+background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+}
+
+.card-9{
+	background-color: #4158D0;
+background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+
+.card-10{
+	background-color: #FF3CAC;
+background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+
+}
+
+
+</style>
+<body>
+	
+
+<div id="frame">
+	
+	<div id="sidepanel">
+		<div id="profile">
+			<div class="wrap">
+				<img id="profile-img" src="{{contact.profile_pic.url}}" class="online fa fa-chevron-down expand-button" aria-hidden="true"/>
+				<p>{{contact.name}}</p>
+				<div id="expanded">
+					
+					<a href="{% url 'account'  %}"><input type="button" value="Profile" /></a>
+					<a href="{% url 'logout'  %}"><input type="button" value="Logout" /></a>
+					
+				</div>
+			</div>
+		</div>
+		<div id="search">
+			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+			<input id="search-room" type="text" placeholder="Search room..." />
+		</div>
+		<div id="contacts">
+			<ul id="list-room">
+				{% for room in roomMenu %}
+				
+				<a href="{% url 'room' room.id %}">
+					<li class="contact">
+						<div class="wrap">
+							<img src="{{room.chatImg.url}}" alt="" />
+							<div class="meta">
+								<p class="name">{{room.chatName}}</p>
+								<p class="preview">{{room.lastMessage}}</p>
+							</div>
+						</div>
+					</li>
+				</a>
+				
+				{% endfor %}
+			</ul>
+
+
+            
+		</div>
+        
+		<div id="bottom-bar">
+			<form method="post" action="{% url 'joinRoom' %}" style="display: none; width: 80%; margin: 0 auto" id="join-form">
+				{% csrf_token %}
+			<input type="text" placeholder="Room code" name="chatId" style="width:100%;" autocomplete="off">
+			<button type="submit" style="width:100%; margin-bottom: 20;">Join</button>
+			</form>
+
+			<a href="{% url 'createChat' %}"><button id="addcontact"><i class="fa fa-plus fa-fw" aria-hidden="true"></i> <span>Create chat</span></button></a>
+			<button id="join"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Join chat</span></button>
+		</div>
+	</div>
+
+<br>
+
+<div class="container">
+    
+    <div class="card">
+        <div class="card-header p-0">
+			<a style="float:left; margin-left: 5; margin-top: 2" class="btn btn-warning" href="{% url 'index' %}"> &#8592; Back </a>
+
+            <h4 class="m-0">Contact List</h4>
+            <ul class="pull-right m-0">
+                <li class="mt-2">
+                    <a href="#" id="search-button" class="hide-search text-secondary" data-command="toggle-search" data-toggle="tooltip" data-placement="top" title="Toggle Search">
+                        <i  class="fa fa-search"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="row search-div" id="user-list-search">
+            <div class="col-md-12 col-12">
+                <div class="search-input">
+                    <input id="search-input" type="text" class="form-control rounded-0" placeholder="Search with Name or email" aria-label="Recipient's username" aria-describedby="basic-addon2" >
+                </div>
+            </div>
+        </div>
+        <ul class="list-group" id="user-list">
+
+        {% for contact in contacts %}
+        <li class="list-group-item" onclick="AddContact({{contact.id}})" id="li-{{contact.id}}" style="cursor: cell">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="row">
+                        <div class="col user-img text-center pt-1">
+                            <img 
+                            src="{{ contact.profile_pic.url }}" 
+                            id="img-{{contact.id}}" 
+                            class="img-responsive img-circle rounded-circle"
+                            name="userAdd"
+                            value={{contact.id}}
+                            />
+                        </div>
+                        <div class="col-10">
+                            <br>
+                            <h5 class="font-weight-bold mb-1">{{contact.name}}</h5>
+                            <div class="user-detail">
+                                <p class="m-0"><i class="fa fa-envelope mr-1" aria-hidden="true"></i> {{contact.user.email}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+
+        </ul>
+
+    </div>
+    
+    <div class="container-fluid">
+        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2" id="list-contact">                
+            
+        </div>
+        <form method="POST" id="list-id">
+            {% csrf_token %}
+            <div style="margin-left: 40%">
+                <input type="text" name="chatName" placeholder="Chat name" required="required" autocomplete="off">
+                <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+<script type="text/html" src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+<script src="{% static 'main.js' %}"></script>
+<script src="{% static 'reconnecting-websocket.js' %}"></script>
+
+<script>
+    
+
+$("#search-button").click(function(){
+$("#user-list-search").toggle(100);
+});
+
+
+
+
+function AddContact(id){
+    var myDiv = document.createElement('div');
+    myDiv.className = 'col-2 user-img text-center';
+    myImg = document.getElementById("img-"+id)
+    var clnImg = myImg.cloneNode(true);
+    clnImg.style = "cursor: not-allowed";
+    document.getElementById("li-"+id).style.display = 'none'
+    clnImg.onclick =  () =>  {
+        myDiv.remove();
+        document.getElementById("hidden-"+id).remove()
+        document.getElementById("li-"+id).style.display = 'block'
+        
+    };
+    myDiv.appendChild(clnImg);
+    document.getElementById('list-contact').append(myDiv)
+    
+    myInput = document.createElement('input');
+    myInput.id = "hidden-"+id;
+    myInput.type = 'hidden';
+    myInput.name = "userAdds";
+    myInput.value = id
+    document.getElementById('list-id').append(myInput)
+}
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
