@@ -1,7 +1,0 @@
-sudo docker run -p 6379:6379 -d redis:5
-
-
-
-<div class="d-flex justify-content-center links">
-						Forgot password? <a href="{% url 'reset_password' %}" class="ml-2">Reset Password</a>
-					</div>
