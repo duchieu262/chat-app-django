@@ -1,0 +1,4 @@
+channels
+djangorestframework
+Pillow
+channels_redis
