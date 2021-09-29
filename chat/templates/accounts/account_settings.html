@@ -1,0 +1,114 @@
+{% load static %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<!DOCTYPE html><html class=''>
+<head>
+	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script>
+	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script>
+	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script>
+	<meta charset='UTF-8'>
+	<meta name="robots" content="noindex">
+	<link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+	<link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+
+<script type="text/html" src="https://use.typekit.net/hoy3lrg.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+
+<link rel='stylesheet' href="{% static 'style.css'%}">
+
+</head>
+<body>
+	
+
+<div id="frame">
+	<div id="sidepanel">
+		<div >
+			<img style="width: 330px;
+			margin: 50 5;
+			align-items: center;" src="{{contact.profile_pic.url}}" >
+			<p style="text-align: center; font-size:25"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+				<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+			  </svg> {{contact.user.email}} </p> 
+		</div>
+		<div id="bottom-bar">
+			<a href="{% url 'createChat' %}"><button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Create chat</span></button></a>
+			<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+		</div>
+	</div>
+	<div class="content">
+		<div class="contact-profile">
+			<a style="float:left; margin-left: 10; margin-top: 12" class="btn btn-warning" href="{% url 'index' %}"> &#8592; Back </a>
+			<p style="float: left; margin-left: 200; font-size:50">Profile</p>
+		</div>
+		
+		
+<style>
+	.profile-pic{
+		max-width: 100px;
+		max-height:100px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+	.card{
+		background-color: transparent;
+		line-height: 2;
+		font-size: 25;
+		border: none;
+		margin-left: 150;
+		color: black;
+	}
+	.card #submit {
+		font-size: 20;
+		margin-left: 120;
+	}
+</style>
+
+<br>
+<div class="row">
+	<div class="col-md-9">
+		<div class="card card-body">
+			
+			<form method="POST" action="" enctype="multipart/form-data">
+				{% csrf_token %}
+				<label >Display name</label>
+				{{form.name}}
+				<hr>
+				<label >Avatar</label>
+				
+				{{form.profile_pic}}
+				<hr>
+			<input id="submit" class="btn btn-primary" type="submit" name="Update Information" value="Submit">
+			</form>
+		</div>
+	</div>
+</div>
+
+
+	</div>
+</div>
+<script type="text/html" src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+<script src="{% static 'main.js' %}"></script>
+<script src="{% static 'reconnecting-websocket.js' %}"></script>
+
+</body>
+</html>
+
+
+
+
+

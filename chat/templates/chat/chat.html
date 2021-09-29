@@ -10,9 +10,9 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-
 <!DOCTYPE html><html class=''>
 <head>
+	
 	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script>
 	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script>
 	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script>
@@ -27,78 +27,97 @@
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
 
+
 <link rel='stylesheet' href="{% static 'style.css'%}">
 
 </head>
 <body>
-
+	
 
 <div id="frame">
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
-				<img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-				<p>Mike Ross</p>
-				<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-				<div id="status-options">
-					<ul>
-						<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
-						<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-						<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
-						<li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
-					</ul>
-				</div>
+				<img id="profile-img" src="{{contact.profile_pic.url}}" class="online fa fa-chevron-down expand-button" aria-hidden="true"/>
+				<p>{{contact.name}}</p>
 				<div id="expanded">
-					<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-					<input name="twitter" type="text" value="mikeross" />
-					<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-					<input name="twitter" type="text" value="ross81" />
-					<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-					<input name="twitter" type="text" value="mike.ross" />
+					
+					<a href="{% url 'account'  %}"><input type="button" value="Profile" /></a>
+					<a href="{% url 'logout'  %}"><input type="button" value="Logout" /></a>
+					
 				</div>
 			</div>
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Search contacts..." />
+			<input id="search-room" type="text" placeholder="Search room..." />
 		</div>
 		<div id="contacts">
-			<ul>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status online"></span>
-						<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-						<div class="meta">
-							<p class="name">Louis Litt</p>
-							<p class="preview">You just got LITT up, Mike.</p>
+			<ul id="list-room">
+				{% for room in roomMenu %}
+				
+				<a href="{% url 'room' room.id %}">
+					<li class="contact">
+						<div class="wrap">
+							<img src="{{room.chatImg.url}}" alt="" />
+							<div class="meta">
+								<p class="name">{{room.chatName}}</p>
+								<p class="preview">{{room.lastMessage}}</p>
+							</div>
 						</div>
-					</div>
-				</li>
-				<li class="contact active">
-					<div class="wrap">
-						<span class="contact-status busy"></span>
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<div class="meta">
-							<p class="name">Harvey Specter</p>
-							<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-						</div>
-					</div>
-				</li>
+					</li>
+				</a>
+				
+				{% endfor %}
 			</ul>
+
+			
 		</div>
 		<div id="bottom-bar">
-			<button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
-			<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+			<form method="post" action="{% url 'joinRoom' %}" style="display: none; width: 80%; margin: 0 auto" id="join-form">
+				{% csrf_token %}
+			<input type="text" placeholder="Room code" name="chatId" style="width:100%;" autocomplete="off">
+			<button type="submit" style="width:100%; margin-bottom: 20;">Join</button>
+			</form>
+
+			<a href="{% url 'createChat' %}"><button id="addcontact"><i class="fa fa-plus fa-fw" aria-hidden="true"></i> <span>Create chat</span></button></a>
+			<button id="join"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Join chat</span></button>
 		</div>
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-			<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-			<p>{{username}}</p>
-			<div class="social-media">
-				<i class="fa fa-facebook" aria-hidden="true"></i>
-				<i class="fa fa-twitter" aria-hidden="true"></i>
-				 <i class="fa fa-instagram" aria-hidden="true"></i>
+			<img src="{{ chat.chatImg.url }}" alt="" />
+			<p>{{chat.chatName}}</p>
+			<div class="social-media" style="font-size:25">
+				
+				<div class="fa dropdown ">
+					<i class="fa fa-users" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					</i>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-left:-400%">
+						<p class="dropdown-item">Participants</p>							
+
+						{% for participant in participants %}
+						<div class="dropdown-item" style="position: relative;">
+							<img style="margin-left: -20;" class="messages chat-log" src="{{ participant.profile_pic.url }}" alt>
+							<p style="display: inline; position: absolute; top:300%" href="#">{{participant.name}}</p>
+
+						</div>
+						{% endfor %}
+						
+					</div>
+				</div>
+				<div class="fa dropdown ">
+					<i class="fa fa-info" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					</i>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-left:-900%">						
+						<div class="dropdown-item" style="position: relative;">
+							<p style="cursor: copy" class="dropdown-item" id="room-code" onclick="copyText(this)">Room code: {{chat.id}}</p>							
+						</div>
+						
+					</div>
+				</div>
+				
+				<a href="{% url 'roomSettings' chat.id %}"><i class="fa fa-cog" aria-hidden="true" ></i></a>
 			</div>
 		</div>
 		<div class="messages">
@@ -107,7 +126,7 @@
 		</div>
 		<div class="message-input">
 			<div class="wrap">
-			<input id="chat-message-input" type="text" placeholder="Write your message..." />
+			<input id="chat-message-input" type="text" placeholder="Write your message..."  />
 			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 			<button id="chat-message-submit" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
@@ -121,14 +140,16 @@
 <script src="{% static 'reconnecting-websocket.js' %}"></script>
 
 <script>
-    var roomName = {{ room_name_json }};
+
+    // var roomName = {{ room_name_json }};
+	var chatId = {{ chat.id }}
     var username = {{ username }};
 
     var chatSocket = new ReconnectingWebSocket(
             'ws://'
             + window.location.host
             + '/ws/chat/'
-            + roomName
+            + chatId
             + '/'
         );
 
@@ -147,7 +168,6 @@
 			}
         };
         chatSocket.onclose = function(e) {
-            console.error('Chat socket closed unexpectedly');
         };
 
         document.querySelector('#chat-message-input').onkeyup = function(e) {
@@ -158,36 +178,108 @@
 
         document.querySelector('#chat-message-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#chat-message-input');
-            const message = messageInputDom.value;
-            chatSocket.send(JSON.stringify({
+            if( messageInputDom.value) {
+				const message = messageInputDom.value;
+            	chatSocket.send(JSON.stringify({
                 'command': 'new_message',
+				'chatId': chatId,
                 'message': message,
                 'from': username
             }));
+			}
             messageInputDom.value = '';
+
+			
         };
 
 		function fetchMessages(){
-			chatSocket.send(JSON.stringify({'command': 'fetch_messages'}));	
+			chatSocket.send(JSON.stringify({
+				'command': 'fetch_messages',
+				'chatId': chatId
+			}));	
 		}
 
 		function createMessage(data){
-            var author = data['author'];
+            var contact = data['contact'];
+            var sender = document.createElement('small');
+			// sender.textContent = contact
             var msgListTag = document.createElement('li');
+			var brTag = document.createElement('br');
             var pTag = document.createElement('p');
             pTag.textContent = data.content;
-            if (author == username) {
+			var timeTag = document.createElement('small');
+			time = data['timestamp'];
+			time_render = renderTimestamp(time)
+			timeTag.textContent = time_render;
+            if (contact == username) {
                 msgListTag.className = 'sent';
             } else {
+				msgListTag.appendChild(sender);
+				msgListTag.appendChild(brTag);
 				var imgTag = document.createElement('img');
-				imgTag.src = "http://emilcarlsson.se/assets/mikeross.png";
+				imgTag.src = data['contactImg'];
                 msgListTag.className = 'replies';
+				msgListTag.title=data['contactName']
 				msgListTag.appendChild(imgTag);
             }
             msgListTag.appendChild(pTag);
+			pTag.appendChild(brTag);
+			// pTag.appendChild(timeTag);
             document.querySelector('#chat-log').appendChild(msgListTag);
+			$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
 		}
 
+		renderTimestamp = timestamp => {
+			let prefix = "";
+			const timeDiff = Math.round(
+			(new Date().getTime() - new Date(timestamp).getTime()) / 60000
+			);
+			if (timeDiff < 1) {
+			// less than one minute ago
+			prefix = "just now...";
+			} else if (timeDiff < 60 && timeDiff > 1) {
+			// less than sixty minutes ago
+			prefix = `${timeDiff} minutes ago`;
+			} else if (timeDiff < 24 * 60 && timeDiff > 60) {
+			// less than 24 hours ago
+			prefix = `${Math.round(timeDiff / 60)} hours ago`;
+			} else if (timeDiff < 31 * 24 * 60 && timeDiff > 24 * 60) {
+			// less than 7 days ago
+			prefix = `${Math.round(timeDiff / (60 * 24))} days ago`;
+			} else {
+			prefix = `${new Date(timestamp)}`;
+			}
+			return prefix;
+		};
+		
+
+		function copyText(element) {
+		var range, selection, worked;
+
+		if (document.body.createTextRange) {
+			range = document.body.createTextRange();
+			range.moveToElementText(element);
+			range.select();
+		} else if (window.getSelection) {
+			selection = window.getSelection();        
+			range = document.createRange();
+			range.selectNodeContents(element);
+			selection.removeAllRanges();
+			selection.addRange(range);
+			
+		}
+		
+		try {
+			document.execCommand('copy');
+			alert('text copied');
+		}
+		catch (err) {
+			alert('unable to copy text');
+		}
+		}
+
+		
 </script>
 
 </body>

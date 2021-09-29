@@ -1,27 +1,99 @@
-<!-- chat/templates/chat/index.html -->
-<!DOCTYPE html>
-<html>
+{% load static %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html><html class=''>
 <head>
-    <meta charset="utf-8"/>
-    <title>Chat Rooms</title>
+	
+	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script>
+	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script>
+	<script type="text/html" src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script>
+	<meta charset='UTF-8'>
+	<meta name="robots" content="noindex">
+	<link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+	<link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+
+<script type="text/html" src="https://use.typekit.net/hoy3lrg.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+
+
+<link rel='stylesheet' href="{% static 'style.css'%}">
+
 </head>
 <body>
-    What chat room would you like to enter?<br>
-    <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
+	
 
-    <script>
-        document.querySelector('#room-name-input').focus();
-        document.querySelector('#room-name-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#room-name-submit').click();
-            }
-        };
+<div id="frame">
+	<div id="sidepanel">
+		<div id="profile">
+			<div class="wrap">
+				<img id="profile-img" src="{{contact.profile_pic.url}}" class="online fa fa-chevron-down expand-button" aria-hidden="true"/>
+				<p>{{contact.name}}</p>
+				<div id="expanded">
+					
+					<a href="{% url 'account'  %}"><input type="button" value="Profile" /></a>
+					<a href="{% url 'logout'  %}"><input type="button" value="Logout" /></a>
+					
+				</div>
+			</div>
+		</div>
+		<div id="search">
+			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+			<input id="search-room" type="text" placeholder="Search room..." />
+		</div>
+		<div id="contacts">
+			<ul id="list-room">
+				{% for room in roomMenu %}
+				
+				<a href="{% url 'room' room.id %}">
+					<li class="contact">
+						<div class="wrap">
+							<img src="{{room.chatImg.url}}" alt="" />
+							<div class="meta">
+								<p class="name">{{room.chatName}}</p>
+								<p class="preview">{{room.lastMessage}}</p>
+							</div>
+						</div>
+					</li>
+				</a>
+				
+				{% endfor %}
+			</ul>
+		</div>
+		<div id="bottom-bar">
+			<form method="post" action="{% url 'joinRoom' %}" style="display: none; width: 80%; margin: 0 auto" id="join-form">
+				{% csrf_token %}
+			<input type="text" placeholder="Room code" name="chatId" style="width:100%;" autocomplete="off">
+			<button type="submit" style="width:100%; margin-bottom: 20;">Join</button>
+			</form>
 
-        document.querySelector('#room-name-submit').onclick = function(e) {
-            var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + roomName + '/';
-        };
-    </script>
+			<a href="{% url 'createChat' %}"><button id="addcontact"><i class="fa fa-plus fa-fw" aria-hidden="true"></i> <span>Create chat</span></button></a>
+			<button id="join"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Join chat</span></button>
+		</div>
+	</div>
+	<div class="content" style="background-image: url({{contact.profile_pic.url}});
+	 background-position: center; background-repeat: no-repeat; background-size: cover;">	
+	</div>
+</div>
+<script type="text/html" src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+<script src="{% static 'main.js' %}"></script>
+<script src="{% static 'reconnecting-websocket.js' %}"></script>
+
+
+
 </body>
 </html>
+
