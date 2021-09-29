@@ -134,7 +134,7 @@ def createChat(request):
         except:
             return redirect('index')    
     contacts = Contact.objects.exclude(user=request.user)
-    return render(request, 'accounts/list.html', {
+    return render(request, 'chat/list.html', {
         'contacts':contacts,
         'roomMenu': getRoomMenu(request.user),
         'contact': contact
